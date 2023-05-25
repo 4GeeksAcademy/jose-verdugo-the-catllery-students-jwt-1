@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
 export const Login = () => {
@@ -23,11 +23,12 @@ export const Login = () => {
             console.log("password a enviar: ", password)
 
 
-            const response = await fetch(process.env.BACKEND_URL + "/login", {
-                method: "GET",
+            const response = await fetch(process.env.BACKEND_URL + "/api/login", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
+                body: JSON.stringify({ email, password }),
             });
 
             if (response.ok) {
@@ -44,7 +45,7 @@ export const Login = () => {
 
                 setEmail('');
                 setPassword('');
-                navigate('/')
+                navigate("/");
             } else {
                 setLoginSuccess(false);
                 setLoginError(true);
